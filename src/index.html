@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div style="font-size: 20px">
+<pre>
+npm i -D webpack webpack-cli => webpack - i yükləmək  və konfiqirasiya etmek  
+package.json => "scripts": {
+                    "build": "webpack --mode production"
+                },
+
+daha sonra => npm install -D html-webpack-plugin
+daha sonra => npm install -D webpack-dev-server       => daha sonra "start": "webpack-dev-server --open --mode development"
+
+terminalda => npm run build
+package.json => "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --open --mode development"
+},
+
+terminalda => npm start
+
+DAHA SONRA GITIGNOR FAYLINI YARADIRIQ .gitignore => bu github - a nələr yüklənməsin !
+.gitignore => {
+    node_modules
+    dist
+} 
+</pre>
+    
+</div>
+</body>
+</html>
