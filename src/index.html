@@ -7,15 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-<div style="font-size: 20px">
+<div style="font-size: 18px">
 <pre>
 npm i -D webpack webpack-cli => webpack - i yükləmək  və konfiqirasiya etmek  
 package.json => "scripts": {
                     "build": "webpack --mode production"
                 },
 
-daha sonra => npm install -D html-webpack-plugin
-daha sonra => npm install -D webpack-dev-server       => daha sonra "start": "webpack-dev-server --open --mode development"
+DAHA SONRA => npm install -D html-webpack-plugin
+DAHA SONRA => npm install -D webpack-dev-server       => daha sonra "start": "webpack-dev-server --open --mode development"
 
 terminalda => npm run build
 package.json => "scripts": {
@@ -25,13 +25,182 @@ package.json => "scripts": {
 
 terminalda => npm start
 
+*************************************************************************************************************************
+
 DAHA SONRA GITIGNOR FAYLINI YARADIRIQ .gitignore => bu github - a nələr yüklənməsin !
 .gitignore => {
     node_modules
     dist
 } 
+
+**************************************************************************************************************************
+
+DAHA SONRA => npm i -D typescript ts-loader => GEDIRIK ELLE "tsconfig.json" file yaradiriq
+webpackconfig.json => yaradib asaqidakilari qeyd edirem
+const HtmlWebpackPlugin = require('html-webpack-plugin'); 
+module.exports = {
+    entry: "./src/index.ts",
+    resolve:{
+        extensions: [".js", ".ts",".tsx"]
+    },
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                exclude: /node_modules/,
+            }
+        ]
+    },
+    plugins: [ new HtmlWebpackPlugin (
+        { 
+            template: './src/index.html' ,
+            filename: 'index.html'
+        }
+    ) ],
+  };
+
+***************************************************************************************************************************
+
+DAHA SONRA => npm i -D @babel/core @babel/preset-env @babel/preset-typescript 
+-> sonra ".babelrc" fayli yaradiram sonrada o faylda yeni -> .babelrc faylinda presets leri qeyd ediremem
+   enter => .babelrc - {
+                            "presets": ["@babel/preset-env", "@babel/preset-typescript"],
+                       }
+
+***************************************************************************************************************************
+
+DAHA SONRA =>npm install -D babel-loader
+webpackconfig.json => faylina daxil ol => loader: "babel-loader"  -> et
+const HtmlWebpackPlugin = require('html-webpack-plugin'); 
+module.exports = {
+    entry: "./src/index.ts",
+    resolve:{
+        extensions: [".js", ".ts",".tsx"]
+    },
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+            }
+        ]
+    },
+    plugins: [ new HtmlWebpackPlugin (
+        { 
+            template: './src/index.html' ,
+            filename: 'index.html'
+        }
+    ) ],
+  };
+
+  ***************************************************************************************************************************
+
+  DAHA SONRA => npm install -D @babel/plugin-proposal-class-properties   -class propertileri ts faylinda desteklesin
+                ve bunu "".babelrc" faylina elave edirem bax asaqi 
+                {
+                    "presets": ["@babel/preset-env", "@babel/preset-typescript"],
+                    "plugins": ["@babel/plugin-proposal-class-properties"]
+                }
+
+  "tsconfig.json" faylini asaqidaki kimi ayarlayiriq 
+  {
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "es6",
+        "strict": true,
+        "noEmit": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true
+    },
+    "include": ["./src/**/*"]
+}
+
+****************************************************************************************************************************
+
+DAHA SONRA => npm install -S react react-dom
+DAHA SONRA => npm install -D @types/react @types/react-dom
+"tsconfig.json" faylini asaqidaki kimi ayarlayiriq
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "es6",
+        "strict": true,
+        "noEmit": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "jsx": "react"
+    },
+    "include": ["./src/**/*"]
+}
+
+***************************************************************************************************************************
+"ctrl+shift+P" edib=> typescript reset server ve - "index.ts" faylinin adini "index.tsx" edirik
+daha sonra "index.tsx" faylinda Asaqidaki kodu yaziriq
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const App = () => {
+    return <div> Hello World! </div>
+}
+
+ReactDOM.render(<App/>, document.getElementById('root'))
+
+---Sonrada index.html de body de => div ve ona id="root" veririk !!!
+
+***************************************************************************************************************************
+
+"webpack.js" => faylina elave etdi -> devtool: "eval-source-map" 
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
+
+module.exports = {
+    entry: "./src/index.tsx",
+    devtool: "eval-source-map",
+    resolve:{
+        extensions: [".js", ".ts",".tsx"]
+    },
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+            }
+        ]
+    },
+    plugins: [ new HtmlWebpackPlugin (
+        { 
+            template: './src/index.html' ,
+            filename: 'index.html'
+        }
+    ) ],
+  };
+
+
+
+  "tsconfi.json" => faylina elave etdi -> "sourceMap": true 
+  {
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "es6",
+        "strict": true,
+        "noEmit": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "jsx": "react",
+        "sourceMap": true
+    },
+    "include": ["./src/**/*"]
+}
 </pre>
     
 </div>
+***************************************************|App|*********************************************************************
+<div id="root"></div>
 </body>
 </html>

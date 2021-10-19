@@ -1,6 +1,20 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 
 module.exports = {
+    entry: "./src/index.tsx",
+    devtool: "eval-source-map",
+    resolve:{
+        extensions: [".js", ".ts",".tsx"]
+    },
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+            }
+        ]
+    },
     plugins: [ new HtmlWebpackPlugin (
         { 
             template: './src/index.html' ,
